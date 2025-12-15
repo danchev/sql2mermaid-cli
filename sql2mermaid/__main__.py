@@ -5,6 +5,8 @@ from sql2mermaid import convert
 def main():
     parser = argparse.ArgumentParser(description="Convert SQL to Mermaid ERD.")
     parser.add_argument('file', nargs='?', metavar='FILE', help="SQL file to convert (defaults to stdin)")
+    parser.add_argument('--root', type=str, default='root', help="Name of the root table (default: 'root')")
+    parser.add_argument('--display-join', choices=['none', 'upper', 'lower'], default='none', help="Display join type (default: 'none')")
     args = parser.parse_args()
     try:
         if args.file:
@@ -12,7 +14,7 @@ def main():
                 query = f.read()
         else:
             query = sys.stdin.read()
-        mermaid_output = convert(query)
+        mermaid_output = convert(query, root_name=args.root, display_join=args.display_join)
         print(mermaid_output)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)

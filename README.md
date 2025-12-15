@@ -61,10 +61,10 @@ You can change the name of the root and whether the FROM, JOIN clause is display
 
 ## How to Develop
 
-If you've installed Poetry on your machine, you can test it by doing the following:
+If you've installed [uv](https://github.com/astral-sh/uv) on your machine, you can test it by doing the following:
 
 ```shell
-poetry run tox
+uv run tox
 ```
 
 ## Author

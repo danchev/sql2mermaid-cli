@@ -1,27 +1,39 @@
-[tool.poetry]
+[project]
 name = "sql2mermaid"
 version = "2.2.1"
 description = "Convert SQL table dependencies to mermaid.js"
-authors = ["nkato <naokato.aq@gmail.com>"]
 readme = "README.md"
-license = "MIT"
-repository = "https://github.com/nkato/sql2mermaid"
+license = {text = "MIT"}
+authors = [{name = "nkato", email = "naokato.aq@gmail.com"}]
+dependencies = [
+    "sqlparse>=0.4.3,<0.5.0",
+    "typing-extensions>=4.0.0,<5.0.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.9.0"
-sqlparse = "^0.4.3"
+[project.urls]
+Repository = "https://github.com/nkato/sql2mermaid"
 
-[tool.poetry.group.dev.dependencies]
-mypy = "^1.1.1"
-pytest = "^7.2.2"
-pyproject-flake8 = "^6.0.0.post1"
-black = "^23.3.0"
-isort = "^5.12.0"
-tox = "^4.4.9"
+[project.scripts]
+sql2mermaid = "sql2mermaid.__main__:main"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.8.17,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.10",
+    "ty>=0.0.1a25",
+    {include-group = "commit"},
+]
+commit = [
+    "commitizen>=4.9.1",
+    "pre-commit>=4.3.0",
+]
+
+[tool.uv.build-backend]
+module-name = "sql2mermaid"
+module-root = "."
 
 [tool.black]
 line-length = 128
